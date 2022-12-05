@@ -1,10 +1,6 @@
-p File.read("input.txt").split("\n").count { |pair|
-    ids = pair.scan(/\d+/).map(&:to_i)
-    if ids[0] == ids[2] || ids[1] == ids[3]
-        true
-    elsif ids[0] < ids[2]
-        ids[1] > ids[3]
-    elsif ids[0] > ids[2]
-        ids[1] < ids[3]
-    end
+p File.read("input.txt").split("\n").map {|pair| pair.scan(/\d+/).map(&:to_i)}.count {|ids|
+    rangeA = (ids[0]..ids[1]).to_a
+    rangeB = (ids[2]..ids[3]).to_a
+    overlap = rangeA & rangeB
+    overlap.length == rangeA.length || overlap.length == rangeB.length
 }
